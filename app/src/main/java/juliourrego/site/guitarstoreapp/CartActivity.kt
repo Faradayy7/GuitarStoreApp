@@ -33,7 +33,7 @@ class CartActivity : AppCompatActivity() {
 
         checkoutButton.setOnClickListener {
             CartManager.clearCart()
-            finish() // Cierra el carrito después de "comprar"
+            finish()
         }
     }
 

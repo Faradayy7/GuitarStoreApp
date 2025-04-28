@@ -18,8 +18,7 @@ class LoginActivity : AppCompatActivity() {
         val createAccountLink = findViewById<TextView>(R.id.create_account)
 
         loginButton.setOnClickListener {
-            // Aquí en el futuro validarás email y password si quieres.
-            // Por ahora, simplemente ir al catálogo.
+
             val intent = Intent(this, CatalogActivity::class.java)
             startActivity(intent)
         }
