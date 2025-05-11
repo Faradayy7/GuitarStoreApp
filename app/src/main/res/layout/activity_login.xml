@@ -24,6 +24,7 @@
         android:inputType="textEmailAddress"
         android:layout_marginTop="40dp" />
 
+
     <EditText
         android:id="@+id/password_input"
         android:layout_width="match_parent"
