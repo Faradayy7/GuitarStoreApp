@@ -4,54 +4,98 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
-import juliourrego.site.guitarstoreapp.utils.SessionManager
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 
 class LoginActivity : AppCompatActivity() {
 
-    private lateinit var sessionManager: SessionManager
+    private lateinit var auth: FirebaseAuth
+    private lateinit var database: DatabaseReference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_login)
 
-        // Instanciar SessionManager
-        sessionManager = SessionManager(this)
-
-        // Si ya hay sesión, ir directo al catálogo
-        if (sessionManager.isLoggedIn()) {
-            navigateToCatalog()
-        }
+        auth = FirebaseAuth.getInstance()
+        database = FirebaseDatabase.getInstance().reference
 
         val emailInput = findViewById<EditText>(R.id.email_input)
         val passwordInput = findViewById<EditText>(R.id.password_input)
         val loginButton = findViewById<Button>(R.id.login_button)
-        val createAccountLink = findViewById<TextView>(R.id.create_account)
+        val createAccount = findViewById<TextView>(R.id.create_account)
 
         loginButton.setOnClickListener {
             val email = emailInput.text.toString().trim()
-            val password = passwordInput.text.toString()
+            val password = passwordInput.text.toString().trim()
 
-            // Validación simulada
-            if (email == "admin@guitar.com" && password == "1234") {
-                sessionManager.saveUser(email, "admin")
-                navigateToCatalog()
-            } else if (email == "cliente@guitar.com" && password == "1234") {
-                sessionManager.saveUser(email, "cliente")
-                navigateToCatalog()
-            } else {
-                Toast.makeText(this, "Credenciales incorrectas", Toast.LENGTH_SHORT).show()
+            if (email.isEmpty() || password.isEmpty()) {
+                Toast.makeText(this, "Por favor completa todos los campos", Toast.LENGTH_SHORT).show()
+                return@setOnClickListener
             }
+
+            auth.signInWithEmailAndPassword(email, password)
+                .addOnCompleteListener { task ->
+                    if (task.isSuccessful) {
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            database.child("users").child(userId).child("role")
+                                .addListenerForSingleValueEvent(object : ValueEventListener {
+                                    override fun onDataChange(snapshot: DataSnapshot) {
+                                        val role = snapshot.getValue(String::class.java)
+                                        when (role) {
+                                            "admin" -> {
+                                                startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
+                                            }
+                                            "cliente" -> {
+                                                startActivity(Intent(this@LoginActivity, CatalogActivity::class.java))
+                                            }
+                                            else -> {
+                                                Toast.makeText(this@LoginActivity, "Rol no reconocido", Toast.LENGTH_SHORT).show()
+                                            }
+                                        }
+                                        finish()
+                                    }
+
+                                    override fun onCancelled(error: DatabaseError) {
+                                        Toast.makeText(this@LoginActivity, "Error al obtener rol", Toast.LENGTH_SHORT).show()
+                                    }
+                                })
+                        }
+                    } else {
+                        Toast.makeText(this, "Error: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                    }
+                }
         }
 
-        createAccountLink.setOnClickListener {
-            val intent = Intent(this, RegisterActivity::class.java)
-            startActivity(intent)
+        createAccount.setOnClickListener {
+            startActivity(Intent(this, RegisterActivity::class.java))
+            finish()
         }
     }
 
-    private fun navigateToCatalog() {
-        val intent = Intent(this, CatalogActivity::class.java)
-        startActivity(intent)
-        finish()
+    override fun onStart() {
+        super.onStart()
+        val currentUser = auth.currentUser
+        if (currentUser != null) {
+            database.child("users").child(currentUser.uid).child("role")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(snapshot: DataSnapshot) {
+                        val role = snapshot.getValue(String::class.java)
+                        when (role) {
+                            "admin" -> {
+                                startActivity(Intent(this@LoginActivity, AdminActivity::class.java))
+                            }
+                            "cliente" -> {
+                                startActivity(Intent(this@LoginActivity, CatalogActivity::class.java))
+                            }
+                        }
+                        finish()
+                    }
+
+                    override fun onCancelled(error: DatabaseError) {
+                        Toast.makeText(this@LoginActivity, "Error al verificar sesión", Toast.LENGTH_SHORT).show()
+                    }
+                })
+        }
     }
 }

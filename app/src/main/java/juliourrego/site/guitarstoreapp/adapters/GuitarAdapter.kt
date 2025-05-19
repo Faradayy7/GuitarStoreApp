@@ -1,4 +1,4 @@
-package juliourrego.site.guitarstoreapp
+package juliourrego.site.guitarstoreapp.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,6 +7,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import juliourrego.site.guitarstoreapp.R
+import juliourrego.site.guitarstoreapp.models.Guitar
 
 class GuitarAdapter(
     private val guitarList: List<Guitar>,
@@ -37,3 +39,4 @@ class GuitarAdapter(
 
     override fun getItemCount(): Int = guitarList.size
 }
+

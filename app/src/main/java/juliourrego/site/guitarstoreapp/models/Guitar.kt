@@ -1,4 +1,4 @@
-package juliourrego.site.guitarstoreapp
+package juliourrego.site.guitarstoreapp.models
 
 data class Guitar(
     val name: String,

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "38325280824",
+    "project_id": "nowplaying-eeaac",
+    "storage_bucket": "nowplaying-eeaac.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:38325280824:android:d47dae46a27d77dc6106cd",
+        "android_client_info": {
+          "package_name": "juliourrego.site.guitarstoreapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAdr34l-wJRxloHNM5gwqIbuy5vECSDX5o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

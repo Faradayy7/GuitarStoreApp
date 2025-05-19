@@ -6,9 +6,10 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import juliourrego.site.guitarstoreapp.adapters.GuitarAdapter
+import juliourrego.site.guitarstoreapp.utils.CartManager
 
 class CartActivity : AppCompatActivity() {
-
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: GuitarAdapter
     private lateinit var totalTextView: TextView

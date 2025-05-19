@@ -1,4 +1,6 @@
-package juliourrego.site.guitarstoreapp
+package juliourrego.site.guitarstoreapp.utils
+
+import juliourrego.site.guitarstoreapp.models.Guitar
 
 object CartManager {
     private val cartItems = mutableListOf<Guitar>()
