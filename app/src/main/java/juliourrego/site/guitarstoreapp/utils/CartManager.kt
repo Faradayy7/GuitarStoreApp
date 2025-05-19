@@ -3,19 +3,19 @@ package juliourrego.site.guitarstoreapp.utils
 import juliourrego.site.guitarstoreapp.models.Guitar
 
 object CartManager {
-    private val cartItems = mutableListOf<Guitar>()
+    private val cart = mutableListOf<Guitar>()
 
     fun addToCart(guitar: Guitar) {
-        cartItems.add(guitar)
+        cart.add(guitar)
     }
 
-    fun getCartItems(): List<Guitar> = cartItems
-
-    fun getTotalPrice(): Double {
-        return cartItems.sumOf { it.price.replace("$", "").toDouble() }
-    }
+    fun getCartItems(): List<Guitar> = cart.toList()
 
     fun clearCart() {
-        cartItems.clear()
+        cart.clear()
+    }
+
+    fun getTotalPrice(): Double {
+        return cart.sumOf { it.price }
     }
 }

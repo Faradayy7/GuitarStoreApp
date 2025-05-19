@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "38325280824",
+    "firebase_url": "https://nowplaying-eeaac-default-rtdb.firebaseio.com",
     "project_id": "nowplaying-eeaac",
     "storage_bucket": "nowplaying-eeaac.firebasestorage.app"
   },
@@ -12,7 +13,20 @@
           "package_name": "juliourrego.site.guitarstoreapp"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "38325280824-60n6iv5mrdan5m1qtrvuljq7pqgrdom8.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "juliourrego.site.guitarstoreapp",
+            "certificate_hash": "26e5cf852191b8bf232f79a26192c89db99b8391"
+          }
+        },
+        {
+          "client_id": "38325280824-b3gihqtv3ld6iu8th30d33bo4fkd66pg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyAdr34l-wJRxloHNM5gwqIbuy5vECSDX5o"
@@ -20,7 +34,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "38325280824-b3gihqtv3ld6iu8th30d33bo4fkd66pg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

@@ -28,12 +28,13 @@ class CatalogActivity : AppCompatActivity() {
         recyclerView = findViewById(R.id.catalog_recycler)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        // Productos mockeados localmente
         val guitars = listOf(
-            Guitar("Fender Stratocaster", "$1200", R.drawable.guitar_1),
-            Guitar("Gibson Les Paul", "$2500", R.drawable.guitar_2),
-            Guitar("Ibanez RG", "$900", R.drawable.guitar_3),
-            Guitar("Yamaha Pacifica", "$400", R.drawable.guitar_4),
-            Guitar("PRS Custom 24", "$3500", R.drawable.guitar_5)
+            Guitar("Fender Stratocaster", 1200.0, R.drawable.guitar_1),
+            Guitar("Gibson Les Paul", 2500.0, R.drawable.guitar_2),
+            Guitar("Ibanez RG", 900.0, R.drawable.guitar_3),
+            Guitar("Yamaha Pacifica", 400.0, R.drawable.guitar_4),
+            Guitar("PRS Custom 24", 3500.0, R.drawable.guitar_5)
         )
 
         adapter = GuitarAdapter(guitars) { guitar ->
@@ -41,20 +42,23 @@ class CatalogActivity : AppCompatActivity() {
         }
         recyclerView.adapter = adapter
 
+        // Botón para abrir carrito
         val cartFab = findViewById<FloatingActionButton>(R.id.cart_fab)
         cartFab.setOnClickListener {
-            val intent = Intent(this, CartActivity::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, CartActivity::class.java))
         }
 
+        // Botón para cerrar sesión
         val logoutFab = findViewById<ExtendedFloatingActionButton>(R.id.logout_button)
         logoutFab.setOnClickListener {
-            FirebaseAuth.getInstance().signOut()
             sessionManager.logout()
+            FirebaseAuth.getInstance().signOut() // <- esto es necesario si estás usando Firebase Auth
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }
+
+
     }
 }

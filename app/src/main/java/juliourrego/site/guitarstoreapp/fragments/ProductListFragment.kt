@@ -29,9 +29,9 @@ class ProductListFragment : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
 
         val guitars = listOf(
-            Guitar("Fender Stratocaster", "$1200", R.drawable.guitar_1),
-            Guitar("Gibson Les Paul", "$2500", R.drawable.guitar_2),
-            Guitar("Ibanez RG", "$900", R.drawable.guitar_3)
+            Guitar("Fender Stratocaster", 1200.0, R.drawable.guitar_1),
+            Guitar("Gibson Les Paul", 2500.0, R.drawable.guitar_2),
+            Guitar("Ibanez RG", 900.0, R.drawable.guitar_3)
         )
 
         adapter = GuitarAdapter(guitars) { guitar ->

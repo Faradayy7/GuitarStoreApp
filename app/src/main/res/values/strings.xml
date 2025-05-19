@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">GuitarStoreApp</string>
+    <string name="default_web_client_id">38325280824-b3gihqtv3ld6iu8th30d33bo4fkd66pg.apps.googleusercontent.com</string>
 </resources>

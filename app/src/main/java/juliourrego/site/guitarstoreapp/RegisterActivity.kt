@@ -43,13 +43,16 @@ class RegisterActivity : AppCompatActivity() {
             auth.createUserWithEmailAndPassword(email, password)
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful) {
-                        val userId = auth.currentUser?.uid ?: ""
-                        val userRef = FirebaseDatabase.getInstance().getReference("users")
-                        val user = mapOf(
-                            "fullName" to fullName,
-                            "email" to email
-                        )
-                        userRef.child(userId).setValue(user)
+                        val userId = auth.currentUser?.uid
+                        if (userId != null) {
+                            val userRef = FirebaseDatabase.getInstance().getReference("users")
+                            val user = mapOf(
+                                "fullName" to fullName,
+                                "email" to email,
+                                "role" to "cliente" // ✅ Asignación de rol por defecto
+                            )
+                            userRef.child(userId).setValue(user)
+                        }
 
                         Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show()
                         startActivity(Intent(this, CatalogActivity::class.java))
