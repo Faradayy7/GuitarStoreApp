@@ -1,7 +1,11 @@
 package juliourrego.site.guitarstoreapp
 
+import android.Manifest
 import android.os.Bundle
+import android.content.pm.PackageManager
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import juliourrego.site.guitarstoreapp.fragments.ProductListFragment
 
 class MainActivity : AppCompatActivity() {
@@ -17,4 +21,13 @@ class MainActivity : AppCompatActivity() {
                 .commit()
         }
     }
+    fun abrirCamara() {
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA)
+            != PackageManager.PERMISSION_GRANTED) {
+            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.CAMERA), 100)
+        } else {
+            // Aquí va el código para abrir la cámara
+        }
+    }
 }
+

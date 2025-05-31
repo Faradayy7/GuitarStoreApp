@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- res/layout/activity_profile.xml -->
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="24dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="8dp"
+    android:background="@color/background">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:padding="24dp"
+        android:background="@color/surface">
+
+        <ImageView
+            android:id="@+id/profileImageView"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/ic_person"
+            android:scaleType="centerCrop"
+            android:background="@drawable/circle_background"
+            android:layout_marginTop="16dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cameraButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Tomar foto"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginTop="24dp"
+            app:icon="@drawable/ic_camera_alt"
+            app:iconTint="@color/primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/galleryButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Elegir de galería"
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton"
+            android:layout_marginTop="12dp"
+            app:icon="@drawable/ic_gallery"
+            app:iconTint="@color/primary" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnFindStore"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Encuentra tu tienda"
+            style="@style/Widget.MaterialComponents.Button"
+            android:layout_marginTop="24dp"
+            app:icon="@drawable/ic_location_on"
+            app:iconTint="@color/onPrimary" />
+    </LinearLayout>
+</com.google.android.material.card.MaterialCardView>

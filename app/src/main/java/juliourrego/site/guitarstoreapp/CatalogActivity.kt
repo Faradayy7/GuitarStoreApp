@@ -2,6 +2,7 @@ package juliourrego.site.guitarstoreapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -52,13 +53,18 @@ class CatalogActivity : AppCompatActivity() {
         val logoutFab = findViewById<ExtendedFloatingActionButton>(R.id.logout_button)
         logoutFab.setOnClickListener {
             sessionManager.logout()
-            FirebaseAuth.getInstance().signOut() // <- esto es necesario si estás usando Firebase Auth
+            FirebaseAuth.getInstance().signOut()
             val intent = Intent(this, LoginActivity::class.java)
             intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
             startActivity(intent)
             finish()
         }
 
-
+        // Botón para ir al perfil
+        val btnEditProfile = findViewById<Button>(R.id.btnEditProfile)
+        btnEditProfile.setOnClickListener {
+            startActivity(Intent(this, ProfileActivity::class.java))
+        }
     }
 }
+
