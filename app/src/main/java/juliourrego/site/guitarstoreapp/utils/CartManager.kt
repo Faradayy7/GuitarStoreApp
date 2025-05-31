@@ -18,4 +18,8 @@ object CartManager {
     fun getTotalPrice(): Double {
         return cart.sumOf { it.price }
     }
+
+    fun removeFromCart(guitar: Guitar) {
+        cart.remove(guitar)
+    }
 }
